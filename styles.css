@@ -1,0 +1,34 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+}
+
+h1 {
+    color: #333;
+}
+
+#permisosContainer {
+    margin-top: 20px;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+li {
+   margin-bottom: 10px;
+}
+
+select {
+    color:black !important;
+    background-color: rgb(224, 224, 15) !important;
+    border: 1px solid #ccc;
+    padding: 5px;
+    font-size: 16px !important;
+}
+
+option {
+    color: black !important;
+    background-color: azure!important;
+}

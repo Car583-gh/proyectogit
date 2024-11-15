@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de Roles y Permisos</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <h1>Gestión de Roles y Permisos</h1>
+
+    <!-- Selección de Roles -->
+    <div>
+        <label for="roles">Selecciona un Rol:</label>
+        <select id="selectRol" onchange="obtenerPermisos()">
+            <option value="">-- Selecciona un Rol --</option>
+            <option value="admin">admin</option>
+            <option value="gerente">gerente</option>
+            <option value="colaborador">colaborador</option>
+            <option value="asistente">asistente</option>
+            <option value="supervisor">supervisor</option>
+            <option value="empleado">empleado</option>
+        </select>
+    </div>
+
+    <style>
+        select {
+            color: black;
+            background-color: beige;
+        }
+        option {
+            color: black;
+            background-color: azure;
+        }
+    </style>
+
+    <!-- Lista de Permisos -->
+    <div id="permisosContainer">
+        <h2>Permisos del Rol</h2>
+        <ul id="listaPermisos"></ul>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
