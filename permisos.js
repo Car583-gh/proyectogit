@@ -2,8 +2,6 @@
 async function obtenerPermisos(){
     const selectElement = document.getElementById('selectRol');
     const selectValue = selectElement ? selectElement.value : null;
-}
-
 try {
     const response = await fetch (`${apiUrl}/roles/${selectValue}/permisos`);
     if (!response.ok) {
@@ -34,6 +32,7 @@ try {
     } catch (error) {
         console.error("Error al obtener permisos:", error);
     }
+}
 
 // Función para editar un permiso 
 function editarPermiso(id, nombre) { 
