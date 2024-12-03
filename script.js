@@ -20,28 +20,24 @@ async function obtenerRoles() {
             option.textContent = rol.nombre; 
             selectRoles.appendChild(option); 
         }); 
-        //llamar a la funcion para cargar los roles al cargar la pagina
-obtenerRoles();
-
-    //Agregar la opcion "Otro/Añadir al final"
-    const opcionOtro = document.createElement("option");
-    opcion.value = "otro";
-    opcionOtro.textContent = "Otro/Añadir";
-    selectRoles.appendChild(opcionOtro);
-        console.log("Opciones agregadas al menu desplegable.");
-    } catch (error) {
+} catch (error) {
         console.error("Error al obtener roles:", error);
     }
 }
+
+// Mostrar el prompt para agregar un nuevo rol 
+function mostrarPromptRol() { 
+    const nuevoNombre = prompt("Introduce el nombre del nuevo rol:"); 
+    if (nuevoNombre) { 
+        agregarNuevoRol(nuevoNombre); 
+    }
+ }
     // Manejar la selección del menú desplegable de roles 
     function manejarSeleccionRol() { 
         const selectElement = document.getElementById('selectRol'); 
         const selectValue = selectElement.value; 
-        if (selectValue === "nuevo") { 
-            const nuevoNombre = prompt("Introduce el nombre del nuevo rol:"); 
-            if (nuevoNombre) agregarNuevoRol(nuevoNombre); 
-            else selectElement.value = ""; // Reinicia la selección si no se introduce un nombre 
-            } else { obtenerPermisos(); } }
+        console.log(`Obteniendo permisos para el rol: ${selectValue}`);
+    }
 
     // Función para agregar un nuevo rol a la base de datos 
     async function agregarNuevoRol(nombre) { 
