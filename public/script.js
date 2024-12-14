@@ -84,4 +84,3 @@ const selectRoles = document.getElementById("roles");
 if (selectRoles) {
     selectRoles.addEventListener("change", manejarSeleccionRol);
 }
-
