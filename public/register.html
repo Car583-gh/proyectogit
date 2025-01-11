@@ -41,3 +41,50 @@
     <script src="register.js"></script>
 </body>
 </html>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="styles.css" rel="stylesheet">
+</head>
+<body>
+    <div class="d-flex justify-content-center align-items-center vh-100"  style="background-color: #f4f6f9;">
+        <div class="card p-4 shadow-lg" style="width: 400px; border-radius: 12px;">
+            <div class="col-md-12">
+                <h2 class="text-center mb-3" style="font-weight: bold;">Registro</h2>
+                <p class="text-center text-muted mb-4">Crea una nueva cuenta</p>
+                <form id="registerForm">
+                    <div class="mb-3">
+                        <label for="nombre" class="form-label fw-bold">Nombre</label>
+                        <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Ingresa tu nombre" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="dni" class="form-label fw-bold">DNI</label>
+                        <input type="text" class="form-control" id="dni" name="dni" placeholder="Ingresa tu DNI" required>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="correo" class="form-label fw-bold">Correo</label>
+                        <input type="email" class="form-control" id="correo" name="correo" placeholder="Ingresa tu correo" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="rol_id" class="form-label fw-bold">ID del Rol</label>
+                        <input type="text" class="form-control" id="rol_id" name="rol_id" placeholder="Ingresa el ID del rol" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="rol_nombre" class="form-label fw-bold">Nombre del Rol</label>
+                        <input type="text" class="form-control" id="rol_nombre" name="rol_nombre" placeholder="Ingresa el nombre del rol" required>
+                    </div>
+                    <div class="d-grid">
+                    <button type="submit" class="btn btn-primary" style="background-color: #007bff; border: none; border-radius: 5px;">Registrarse</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script src="register.js"></script>
+</body>
+</html>
