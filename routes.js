@@ -12,7 +12,6 @@ try {
     // Buscar al usuario en la base de datos
     const result = await pool.query('SELECT * FROM usuarios WHERE dni = $1 AND rol_id = $2', [dni, rol_id]);
     if (result.rows.length === 0) {
-        res.json({ success: true, redirect: '/dashboard.html' });
         return res.status(401).json({ success: false, message: 'Credenciales incorrectas' });
     }
     res.json({ success: true, message: 'Login exitoso', usuario: result.rows[0] });
@@ -24,14 +23,14 @@ try {
 
 // Registro
 router.post('/api/register', async (req, res) => {
-    const { nombre, dni, correo, rol_id } = req.body;
-    if (!nombre || !dni || !correo || !rol_id) {
+    const { nombre, dni, correo, rol_id, rol_nombre } = req.body;
+    if (!nombre || !dni || !correo || !rol_id || !rol_nombre) {
         return res.status(400).json({ success: false, message: 'Todos los campos son obligatorios' });
     }
     try {
         const fecha_registro = new Date(); // Fecha actual para el campo fecha_registro
-        const result = await pool.query('INSERT INTO usuarios (dni, nombre, correo, fecha_registro, rol_id) VALUES ($1, $2, $3, $4, $5) RETURNING *',
-            [dni, nombre, correo, fecha_registro, rol_id] );
+        const result = await pool.query('INSERT INTO usuarios (dni, nombre, correo, fecha_registro, rol_id, rol_nombre) VALUES ($1, $2, $3, $4, $5) RETURNING *',
+            [dni, nombre, correo, fecha_registro, rol_id, rol_nombre] );
     res.status(201).json({ success: true, usuario: result.rows[0] });
 } catch (err) {
     res.status(500).json({ success: false, message: 'Error interno del servidor' });
@@ -71,16 +70,39 @@ router.get("/permisos", async (req, res) => {
     }
 });
 
+// Función para editar un permiso 
+router.put('/permisos/:id', async (req, res) => {
+    const { id } = req.params;
+    const { nombre_permiso } = req.body;
+    if (!nombre_permiso) {
+        return res.status(400).json({ success: false, message: 'El nombre del permiso es obligatorio' });
+    }
+    try {
+        const result = await pool.query(
+            'UPDATE permisos SET nombre_permiso = $1 WHERE id = $2 RETURNING *',
+            [nombre_permiso, id]
+        );
+        if (result.rows.length === 0) {
+            return res.status(404).json({ success: false, message: 'Permiso no encontrado' });
+        }
+        res.json({ success: true, permiso: result.rows[0] });
+    } catch (error) {
+        console.error('Error al editar permiso:', error);
+        res.status(500).json({ success: false, message: 'Error interno del servidor' });
+    }
+});
 // Endpoint para eliminar un permiso 
 router.delete('/permisos/:id', async (req, res) => { 
     const { id } = req.params; 
     try { 
-        const result = await pool.query('DELETE FROM permisos WHERE id_permiso = $1', [id]); 
-        res.sendStatus(200); } catch (error) { 
-            console.error('Error al eliminar el permiso:', error); 
-            res.status(500).send('Error al eliminar el permiso'); 
+        const result = await pool.query('DELETE FROM permisos WHERE id = $1 RETURNING *', [id]); 
+        if (result.rows.length === 0) {
+            return res.status(404).json({ success: false, message: 'Permiso no encontrado' });
         }
-     });
-
-
-module.exports = router;
+        res.json({ success: true, message: 'Permiso eliminado exitosamente' }); 
+    }
+     catch (err) { 
+        res.status(500).json({ success: false, message: 'Error interno del servidor' }); 
+    }
+ });
+ module.exports = router;
